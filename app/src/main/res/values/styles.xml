@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MyFilledBoxStyle" parent="Widget.MaterialComponents.TextInputEditText.FilledBox">
+        <!-- Customize other attributes as needed -->
+    </style>
+</resources>
