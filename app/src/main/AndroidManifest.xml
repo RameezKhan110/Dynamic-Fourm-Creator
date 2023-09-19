@@ -6,10 +6,10 @@
         android:name="android.hardware.camera"
         android:required="false" />
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"></uses-permission>
-    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -22,13 +22,16 @@
         android:theme="@style/Theme.MultiDropDown"
         tools:targetApi="31">
         <activity
-            android:name=".FinalActivity"
+            android:name=".GeneratePDFActivity"
             android:exported="false" />
         <activity
-            android:name=".SubmittedViews"
+            android:name=".SubmitForumActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".CreateForumActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChooseViewsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
