@@ -237,7 +237,7 @@ class SubmitForumActivity : AppCompatActivity() {
     private val startCameraForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                Log.d("TAG", "camera image: " + imageUri)
+                Log.d("TAG", "camera image: $imageUri")
 
                 if (currentImageIndex < imageViewList.size) {
                     imageViewList[currentImageIndex].setImageURI(imageUri)

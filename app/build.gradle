@@ -48,7 +48,5 @@ dependencies {
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
-//    implementation 'com.vanniktech:android-image-cropper:4.5.0'
-//    implementation 'com.github.Drjacky:ImagePicker:2.3.22'
 
 }
