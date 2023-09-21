@@ -13,8 +13,8 @@ import com.example.multidropdown.utils.ApplicationClass
 class ChooseViewAdapter :
     ListAdapter<MyItem, RecyclerView.ViewHolder>(DiffUtil()) {
 
-    var onMinusCLicked: ((Int) -> Unit)? = null
-    var onLongClickListener: ( () -> Unit)? = null
+    var onMinusCLicked: ((MyItem) -> Unit)? = null
+    var onLongClickListener: (() -> Unit)? = null
 
     inner class ChooseViewsViewHolder(private val binding: DropDownLayoutBinding): RecyclerView.ViewHolder(binding.root) {
 
@@ -27,7 +27,7 @@ class ChooseViewAdapter :
                 minusDropDown.text = item.minusBtn
 
                 minusDropDown.setOnClickListener {
-                    removeItem(adapterPosition)
+                    onMinusCLicked?.invoke(item)
                 }
                 binding.root.setOnLongClickListener {
                     onLongClickListener?.invoke()
@@ -44,19 +44,12 @@ class ChooseViewAdapter :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        val item = currentList[position]
+        val item = getItem(position)
         (holder as ChooseViewsViewHolder).bind(item)
     }
 
     fun onItemClickListener(listener: () -> Unit) {
         onLongClickListener = listener
-    }
-
-    private fun removeItem(position: Int) {
-        val list = currentList.toMutableList()
-        list.removeAt(position)
-        notifyItemRemoved(position)
-        submitList(list)
     }
 
     class DiffUtil : androidx.recyclerview.widget.DiffUtil.ItemCallback<MyItem>() {

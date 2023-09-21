@@ -35,6 +35,7 @@ class ChooseViewsActivity : AppCompatActivity() {
     private val viewsListOfDropDown = mutableListOf<String>()
     private val chooseViewAdapter = ChooseViewAdapter()
     private val layoutItemsList = mutableListOf<MyItem>()
+    private var itemId: Int = 0
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +44,6 @@ class ChooseViewsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         itemTouchHelper.attachToRecyclerView(binding.dropDownContainerRV)
-
 
         ViewType.values().map {
             viewsList.add(it.key)
@@ -54,34 +54,26 @@ class ChooseViewsActivity : AppCompatActivity() {
 
         binding.Add.setOnClickListener {
 
-            layoutItemsList.add(MyItem(viewsList, "-"))
+            itemId++
+            layoutItemsList.add(MyItem(itemId, viewsList, "-"))
             chooseViewAdapter.submitList(layoutItemsList)
             chooseViewAdapter.notifyDataSetChanged()
-
-//            dropDownLayout.minusDropDown.setOnClickListener { view ->
-//                if (binding.dropDownContainer.childCount > 2) {
-//                    binding.dropDownContainer.removeView(dropDownLayout.root)
-//                } else {
-//                    Toast.makeText(this, "This view can't be removed", Toast.LENGTH_SHORT).show()
-//                }
-//            }
         }
 
-//        chooseViewAdapter.onItemClickListener {
-//        }
+        chooseViewAdapter.onMinusCLicked = { item ->
 
+            Log.d("TAG", "position: $item")
+            val deletePos = layoutItemsList.indexOfFirst {
+                it.itemId == item.itemId
+            }
+            if(binding.dropDownContainerRV.childCount > 1) {
+                layoutItemsList.removeAt(deletePos)
+                chooseViewAdapter.notifyItemRemoved(deletePos)
+            } else {
+                Toast.makeText(this, "This view can't be removed",Toast.LENGTH_SHORT).show()
+            }
 
-
-
-//        chooseViewAdapter.onMinusCLicked = { position ->
-//
-//            Log.d("TAG", "position: " + position)
-//            layoutItemsList.removeAt(position + 1)
-//            Log.d("TAG", "list size" + layoutItemsList.size)
-////            chooseViewAdapter.notifyItemRemoved(position)
-//            chooseViewAdapter.notifyDataSetChanged()
-//
-//        }
+        }
 
         binding.choose.setOnClickListener {
 
@@ -150,6 +142,4 @@ class ChooseViewsActivity : AppCompatActivity() {
             }
         ItemTouchHelper(itemTouchCallBack)
     }
-
-
 }
